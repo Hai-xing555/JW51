@@ -1,0 +1,85 @@
+create database bysj1851 default character set utf8 collate utf8_general_ci;
+
+use bysj1851;
+
+create table degree(
+    id bigint not null auto_increment,
+    description varchar(225) not null,
+    no varchar(225) not null,
+    remarks varchar(225),
+    primary key(id)
+  );
+
+
+create table school(
+    id bigint not null auto_increment,
+    description varchar(225) not null,
+    no varchar(225) not null,
+    remarks varchar(225),
+    primary key(id)
+  );
+
+create table department(
+    id bigint not null auto_increment,
+    description varchar(225) not null,
+    no varchar(225) not null,
+    remarks varchar(225),
+    school_id bigint not null,
+    primary key(id,school_id),
+    foreign key(school_id) references school(id)
+   );
+
+
+create table profTitle(
+   id bigint not null auto_increment,
+   description varchar(225) not null,
+   no varchar(225) not null,
+   remarks varchar(225),
+   primary key(id)
+);
+
+
+create table teacher(
+    id bigint not null auto_increment,
+    name varchar(225) not null,
+    title_id bigint not null,
+    degree_id bigint not null,
+    department_id bigint not null,
+    primary key(id,title_id,degree_id,department_id),
+    foreign key(title_id) references profTitle(id),
+    foreign key(degree_id) references degree(id),
+    foreign key(department_id) references department(id)
+    );
+ insert into degree(no ,description) values("01","doctor");
+
+insert into School(description,no) values ("土木学院","2");
+insert into Department(description,no,remarks,school_id) values ("土木学院","1","",6);
+
+默认账户为 Administrator ，初始密码为 L2FkERE5dZqDf
+49.234.227.112
+
+Degree:
+{"description":"管理","id":2,"no":"04"}
+
+Department:
+{"description":"id为null新系","id":2,"no":"01","remarks":"","school":{"description":"管理工程","id":1,"no":"01","remarks":""}}
+
+ProfTitle:
+{"description":"id为职称","id":1,"no":"0201","remarks":"the best"}
+
+School:
+{"description":"管理工程","id":1,"no":"01","remarks":""}
+
+Teacher:
+{"degree":{"description":"管理","id":2,"no":"04"},"department":{
+        "description": "艺术景观",
+        "id": 15,
+        "no": "1",
+        "remarks": "",
+        "school": {
+            "description": "管理学院",
+            "id": 4,
+            "no": "1"
+        }
+    },"name":"苏同","title":{"description":"id为职称","id":1,"no":"0201","remarks":"the best"}}
+
